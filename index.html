@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Circuito – timer de treino</title>
+  <meta name="description" content="Timer ajustável para treino em circuito: defina exercícios, duração e descanso, com avisos sonoros.">
+  <meta name="theme-color" content="#14213d">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="icon" href="icon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="icon.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;800&family=Barlow:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body data-phase="setup">
+  <button id="mute" class="mute" type="button" aria-pressed="false" aria-label="Som ligado">🔊</button>
+
+  <main id="setup" class="screen">
+    <header>
+      <h1>Monte o circuito</h1>
+      <p>Ajuste os tempos e toque em Iniciar. Beeps avisam o começo e o fim de cada exercício.</p>
+    </header>
+
+    <form id="form" autocomplete="off" novalidate>
+      <div class="field">
+        <label for="exercises">Quantidade de exercícios</label>
+        <div class="stepper">
+          <button type="button" data-target="exercises" data-step="-1" aria-label="Diminuir exercícios">−</button>
+          <input id="exercises" type="number" inputmode="numeric" min="1" max="99">
+          <button type="button" data-target="exercises" data-step="1" aria-label="Aumentar exercícios">+</button>
+        </div>
+      </div>
+
+      <div class="field">
+        <label for="work">Duração de cada exercício <small>segundos</small></label>
+        <div class="stepper">
+          <button type="button" data-target="work" data-step="-5" aria-label="Diminuir duração">−</button>
+          <input id="work" type="number" inputmode="numeric" min="5" max="3600">
+          <button type="button" data-target="work" data-step="5" aria-label="Aumentar duração">+</button>
+        </div>
+      </div>
+
+      <div class="field">
+        <label for="rest">Tempo de descanso <small>segundos</small></label>
+        <div class="stepper">
+          <button type="button" data-target="rest" data-step="-5" aria-label="Diminuir descanso">−</button>
+          <input id="rest" type="number" inputmode="numeric" min="0" max="3600">
+          <button type="button" data-target="rest" data-step="5" aria-label="Aumentar descanso">+</button>
+        </div>
+      </div>
+
+      <details>
+        <summary>Mais opções</summary>
+        <div class="field">
+          <label for="rounds">Voltas no circuito</label>
+          <div class="stepper">
+            <button type="button" data-target="rounds" data-step="-1" aria-label="Diminuir voltas">−</button>
+            <input id="rounds" type="number" inputmode="numeric" min="1" max="20">
+            <button type="button" data-target="rounds" data-step="1" aria-label="Aumentar voltas">+</button>
+          </div>
+        </div>
+        <div class="field">
+          <label for="prep">Contagem inicial <small>segundos</small></label>
+          <div class="stepper">
+            <button type="button" data-target="prep" data-step="-1" aria-label="Diminuir contagem">−</button>
+            <input id="prep" type="number" inputmode="numeric" min="0" max="60">
+            <button type="button" data-target="prep" data-step="1" aria-label="Aumentar contagem">+</button>
+          </div>
+        </div>
+      </details>
+
+      <p id="summary" class="summary" aria-live="polite"></p>
+      <button id="start" class="btn start" type="submit">Iniciar treino</button>
+    </form>
+  </main>
+
+  <section id="timer" class="screen" hidden>
+    <p id="phaseLabel" class="phase" aria-live="polite"></p>
+    <div class="ring" id="ring">
+      <svg viewBox="0 0 120 120" aria-hidden="true">
+        <circle class="track" cx="60" cy="60" r="54"></circle>
+        <circle id="arc" class="arc" cx="60" cy="60" r="54"></circle>
+      </svg>
+      <div id="time" class="time" role="timer">0</div>
+    </div>
+    <p id="info" class="info"></p>
+
+    <div id="controls" class="controls">
+      <button id="pause" class="btn primary" type="button">Pausar</button>
+      <button id="skip" class="btn" type="button">Pular</button>
+      <button id="stop" class="btn" type="button">Encerrar</button>
+    </div>
+    <button id="again" class="btn primary wide" type="button" hidden>Novo treino</button>
+
+    <div class="bar" aria-hidden="true"><span id="barFill"></span></div>
+  </section>
+
+  <script src="js/app.js"></script>
+</body>
+</html>

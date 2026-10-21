@@ -1,0 +1,15 @@
+{
+  "name": "Circuito – timer de treino",
+  "short_name": "Circuito",
+  "description": "Timer ajustável para treino em circuito, com avisos sonoros.",
+  "lang": "pt-BR",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#f3f4f0",
+  "theme_color": "#14213d",
+  "icons": [
+    { "src": "icon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any maskable" }
+  ]
+}
